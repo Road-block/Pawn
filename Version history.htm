@@ -1,0 +1,954 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Pawn past and future versions</title>
+<link rel="stylesheet" type="text/css" href="VgerCore/VgerCore.css" />
+</head>
+<body>
+
+<h1>Pawn past and future versions</h1>
+
+<p>
+	I got tired of the version history section of the <a href="Readme.htm">
+	readme</a> being longer than the rest of it, so I moved parts here.</p>
+<h2>Future versions</h2>
+<p>There are many features that I&#39;d like to add in future versions of Pawn, 
+besides fixing issues listed in the &quot;known issues&quot; below.</p>
+<ul>
+	<li>Now that the Cataclysm beta is in progress, I need to add a way to 
+	select the quality level of meta gems to use between 80 and 85, just like 
+	you can for non-meta gems.</li>
+	<li>I need to add a way for scales to choose a specific meta gem, and the 
+	Wowhead scales should always have the best meta gem for each class/spec 
+	chosen, since that&#39;s not always the one with the best primary stats.</li>
+	<li>To make Pawn more approachable for new users, I think that by default 
+	I&#39;ll remove Pawn values from trinkets (since trinkets have secondary effects 
+	and thus their Pawn values are very rarely accurate).&nbsp; (I&#39;ll add an option to turn values back 
+	on for trinkets, and there&#39;s already an option to toggle current item 
+	values.)</li>
+	<li>I&#39;m investigating how Pawn could eliminate or reduce its dependence on 
+	lots and lots of hand-translated text patterns by using new API features 
+	added in patch 3.2.<ul>
+		<li>Specifically, the new API function GetItemStats was added.&nbsp; 
+		Unfortunately, at this time, it only supports returning stats for the 
+		base version of an item, not the current version, which makes it 
+		insufficient for Pawn.</li>
+		<li>I could use GetItemStats for base stats only and use the old code 
+		for enchanted stats, but that&#39;s starting to get pretty complicated, and 
+		it would likely introduce weird bugs where DPS would be slightly 
+		different between a base item and an enchanted item due to differences 
+		in calculation methods, or old-world DPS enchantments would not work 
+		properly, or things like those.</li>
+	</ul>
+	</li>
+	<li>The Compare tab should be updated to allow comparisons between two 
+	one-handed items and a two-handed item.</li>
+	<li>It might be nice to have a zoom feature for the UI since it&#39;s kinda big, 
+	especially for non-widescreen monitors.</li>
+	<li>Additional ways you might be able to get to the Compare tab in the 
+	future:<ul>
+		<li>I could add little Pawn buttons to item link windows.&nbsp; I 
+		initially decided not to do this because I thought they&#39;d be obnoxious.</li>
+		<li>I could add a &quot;compare this item with what I already have&quot; button to 
+		loot roll windows to make it more obvious than just right-clicking the 
+		icon.&nbsp; Or, I could even just add a little comparison window that 
+		sticks to the side.</li>
+		<li>In addition to the &quot;currently equipped&quot; buttons in the lower-left, I 
+		could also remember the best 1-2 items you&#39;ve ever equipped for a given 
+		slot type, and display those there too.&nbsp; This helps those with 
+		multiple gear sets (for example, shamans with a resto set and an enhance 
+		set).</li>
+	</ul>
+	</li>
+	<li>Right now, the Compare tab only shows stats that have nonzero values in 
+	your currently-selected scale.&nbsp; I could add an option to show all stats, though that 
+	would make it a lot harder to use at a glance—weapons have a lot of stats, 
+	including 8-12 stats just for tracking damage and speed, plus any real stats 
+	on the item.</li>
+	<li>I might change the Compare tab so that it still shows item stats even if 
+	there&#39;s only one item.</li>
+	<li>I could improve the Compare tab to support comparing multiple sets of 
+	items at once.&nbsp; (For example, an entire gear set versus another 
+	person&#39;s entire gear set.)</li>
+	<li>I still haven&#39;t optimized some parts of Pawn for performance.&nbsp; One 
+	thing that I could do is collect statistics on how often various item stats 
+	are used, and then reorder them in the files so that the most common stats 
+	are checked first, and the rarest stats are checked last.&nbsp; That might 
+	be difficult and make translation much more challenging, though.</li>
+	<li>I could add an option to hide values from items you could never equip.&nbsp; 
+	For example, shamans could have values hidden on swords, sigils, plate 
+	armor, and wands.</li>
+	<li>There are other things I could annotate tooltips with, but I&#39;m not sure 
+	which things I&#39;ll do, since some might conflict with other mods or require a 
+	lot of configuration.</li>
+	<li>I could make it so that Pawn could generate Wowhead/LootRank URLs from your 
+	scales.</li>
+	<li>Pawn could keep track of the best item of each type (Helm, Bracers, 
+	Trinket, ...) that you&#39;ve ever equipped, and then show you how the item 
+	you&#39;re hovering over compares to that.&nbsp; There would be one &quot;best item&quot; 
+	per scale, per item type (two for rings and trinkets).&nbsp; Or, it could just show a difference between 
+	the hovered item and the equipped item.&nbsp; This would be useful for 
+	evaluating gear sets that you&#39;re not currently wearing—for example, if a DPS 
+	cloak drops but you&#39;re in your tanking gear.</li>
+	<li>One very cool feature would be a way to automatically share Pawn scale 
+	tags with another player through an in-game whisper.&nbsp; Something like 
+	/pawn share Vger &lt;scale name&gt;.&nbsp; Or, there could just be a window 
+	where you could type another player&#39;s name to see their Pawn scales if they 
+	use Pawn... sort of like a Scalesteal spell.</li>
+	<li>I&#39;d love to integrate with AtlasLoot&#39;s Wish List feature, helping you 
+	find and manage upgrades to your items.</li>
+	<li>Down the road, I might also like to add a way for people to assign values to 
+	specific item effects and enchantments.&nbsp; For example, Spellsurge is a 
+	useful weapon enchantment for casters, but Pawn doesn&#39;t give it a value.&nbsp; 
+	Right now, you have to rely on the asterisks and intuition to properly 
+	evaluate Spellsurge versus another weapon enchantment.&nbsp; I haven&#39;t 
+	decided how this would work just yet...&nbsp; Is it part of a single scale, 
+	or a per-character option?&nbsp; Does it assign stats (Intellect +30) or 
+	points (Score +30)?&nbsp; And what&#39;s the point of assigning it a value when 
+	you&#39;d generally use unenchanted value in these situations anyway?</li>
+</ul>
+	<h2>Known issues and bugs</h2>
+<p>Check here first if you think you&#39;ve found a new bug; maybe I already know 
+about it.</p>
+<ul>
+	<li>Unverified: Pawn adds the (?) icon to the line that EPGP adds to 
+	tooltips as if it were a stat.</li>
+	<li>Unverified: wands may only be getting the regular damage stats, and not 
+	the ranged damage stats.</li>
+	<li>Unverified: Fiery and other weapon damage enchantments are 
+	only counting for the basic DPS stat, and not for the specialized DPS stats 
+	like melee DPS.</li>
+	<li>Weapon damage is actually stored in the game with more precision than is 
+	displayed.&nbsp; For example, Gavel of Naaru Blessings says in-game that it 
+	does 16-117 damage, but according to the game files, it does 16.12-116.12 
+	damage.&nbsp; This causes Pawn to report its DPS as being slightly different 
+	than the in-game tooltip says.</li>
+	<li>Item links that you click that aren&#39;t already in your game cache show 
+	the message &quot;Retrieving item information&quot; and then when the item appears, there 
+	are no Pawn values until the next time you show that item.&nbsp; This type of 
+	problem has existed forever, and also affects the Blizzard feedback UI 
+	line, but still I&#39;d like to find a way to solve it.</li>
+</ul>
+<h2>Ancient release history</h2>
+<p>For recent version history, see the <a href="Readme.htm">Pawn readme</a>.</p>
+<h3>Version 1.2.5</h3>
+<ul>
+	<li>What used to be called the enchanted value of an item is now the current 
+	value, and what used to be called the unenchanted value is now the base 
+	value.&nbsp; The word &quot;base&quot; now also appears on tooltips.&nbsp; (No functionality has changed; this is just a terminology 
+	change.)</li>
+	<li>Fixed the error that occurred when hovering over Brewfest steins.</li>
+</ul>
+<h3>Version 1.2.4</h3>
+<ul>
+	<li>Fixed an error that occurred when hovering over profession recipes.</li>
+</ul>
+<h3>Version 1.2.3</h3>
+<ul>
+	<li>You can now select what quality of gems to use for each of your scales 
+	on the Gems tab: uncommon, rare, or epic.&nbsp; Each scale can have a 
+	different quality level, so your main spec scale can use epic gems, and your 
+	offspec scale can use rare gems.</li>
+	<li>By popular request, enchanted values of items now no longer include any 
+	points for sockets on the item, since the enchanted value is meant to 
+	reflect the current state of the item.&nbsp; This means that before you put 
+	gems in an item, the enchanted value of an item will be lower than the 
+	unenchanted value.</li>
+	<li>Fixed a bug where occasionally items that weren&#39;t enchanted would show 
+	two equal values, such as &quot;123.4 (123.4)&quot;.&nbsp; (This was only a display 
+	issue; the values were being calculated properly.)</li>
+</ul>
+<h3>Version 1.2.2</h3>
+<ul>
+	<li>Pawn will now calculate correct socket values if you have the &quot;normalize 
+	values (like Wowhead)&quot; option enabled.</li>
+</ul>
+<h3>Version 1.2.1</h3>
+<ul>
+	<li>Fixed the &quot;attempt to perform arithmetic on field &#39;?&#39; (a nil value)&quot; 
+	error that some users were experiencing in Pawn 1.2.</li>
+</ul>
+<h3>Version 1.2</h3>
+<ul>
+	<li><b>Note:</b> Upon installation, this version of Pawn will automatically make adjustments to 
+	each of your
+scales&#39; socket values.&nbsp; To avoid this, you can turn off the option for each 
+	scale to always correctly match gem colors.</li>
+	<li>By default, Pawn will automatically choose the best rare-quality level 
+	80 gem of each color and use the value of that gem when calculating item 
+	values.&nbsp; Most people will no longer ever need to manually set values 
+	for red, yellow, or blue sockets.</li>
+	<li>There&#39;s now a new Gems tab in the Pawn UI.&nbsp; This tab shows you the 
+	best rare-quality level 80 gems that are available for any of your scales.&nbsp; 
+	Never again will you wonder which gems to have cut for that new boss drop.
+	<ul>
+		<li>The Gems tab also displays suggested meta gems, but take these with a grain of
+		salt; Pawn ignores the special effects on the gem.</li>
+		<li>The Gems tab only considers rare-quality level 80 gems.&nbsp; I&#39;ll 
+		add support for epic gems very soon in an upcoming Pawn update.</li>
+	</ul>
+	</li>
+	<li>Pawn will now add a tooltip to the item socketing window displaying the 
+	suggested gems to use when socketing that item for each of your scales.&nbsp; 
+	In addition, the window now has a Pawn button that takes you directly to the 
+	Gems tab for more details.</li>
+	<li>Meta sockets are now covered by two values instead of one: the old "Meta socket" value
+	is now "Meta: stats" and covers the normal stat bonuses from meta gems.  The
+	new value is "Meta: effect" and covers the bonus effects from meta gems.  Helms with an
+	empty meta socket will get the values from both added to their totals.  Helms with a
+	filled meta socket will get the values of Meta: effect and the actual stats on the gem added
+	to their totals.  This reflects the fact that stat-for-stat, helms with meta sockets are clearly
+	better than helms without them because of the added effects that meta gems bring.</li>
+	<li>Adjusted the value of MP5 in the default scale to correspond with current itemization.</li>
+	<li>Removed the Pawn feature to show item levels, as it is now built into the game.</li>
+	<li>Fixed the &quot;Could not parse the item link&quot; error that appeared when 
+	clicking the links that items such as the Titanium Seal of Dalaran and Worn 
+	Troll Dice add to chat.</li>
+	<li>Corrected the display of socket bonuses on weapons in the Compare tab.</li>
+	<li>(English) Enchant Boots: Greater Vitality now works again.</li>
+</ul>
+<h3>Version 1.1.13</h3>
+<ul>
+	<li>Fixed the "attempt to perform arithmetic on local 'Dps&#39; (a nil value)&quot; 
+	issue introduced by 1.1.12 relating to feral attack power calculations.</li>
+</ul>
+<h3>Version 1.1.12</h3>
+<ul>
+	<li>Though it doesn&#39;t actually exist as a real weapon stat anymore, druids 
+	can once again assign a value to feral attack power instead of weapon DPS if 
+	they don&#39;t like multiplying by 14.</li>
+	<li>Updated Outfitter support to handle newer versions of Outfitter.&nbsp; 
+	(If alternate outfit tooltips stop working for you, be sure to download the 
+	latest version of Outfitter too.)</li>
+</ul>
+<h3>Version 1.1.11</h3>
+<ul>
+	<li>When &quot;show item levels&quot; is enabled, you can now hover over the Pawn 
+	button on your character sheet or an inspected player&#39;s character sheet to 
+	get an estimate of that player&#39;s average item level in epic gear.&nbsp; For 
+	example, an epic gear level of 200 means that the player is in full 10-man 
+	Naxxramas gear; 213 means that the player is in full 25-man Naxxramas gear.</li>
+</ul>
+<h3>Version 1.1.10</h3>
+<ul>
+	<li>Added support for Pawn values on Outfitter alternate-outfit tooltips.</li>
+</ul>
+<h3>Version 1.1.9</h3>
+<ul>
+	<li>Fixed a bug where scales that used to have a value for colorless sockets 
+	back when Pawn included them as a possible stat would show inaccurate values 
+	if you had normalization turned on.</li>
+	<li>Fixed a bug where armor penetration gems (like Fractured Scarlet Ruby) 
+	didn&#39;t work in the English version.</li>
+	<li>Added support for Titanium Plating and Enchant Weapon: Accuracy.</li>
+	<li>Minor updates for colorblind mode in patch 3.1.</li>
+</ul>
+<h3>Version 1.1.8</h3>
+<ul>
+	<li>Removed the feral attack power stat entirely since it no longer exists 
+	directly on weapons.&nbsp; (Feral druids should increase their value for 
+	weapon DPS accordingly.)</li>
+	<li>Added compatibility with the mod tdItemTip.</li>
+</ul>
+<h3>Version 1.1.7</h3>
+<ul>
+	<li>One more potential fix for the error that I worked on in the last 
+	version.</li>
+</ul>
+<h3>Version 1.1.6</h3>
+<ul>
+	<li>Fixed an issue where Pawn would in rare situations cause an error when it was 
+	loaded for the first time for a character (either a new character, or a 
+	character new to Pawn).&nbsp; Whether or not a given person would actually 
+	experience this bug is essentially random.&nbsp; This is also reported to 
+	have worked around game crashes that a few people were seeing.</li>
+	<li>Added support for Enchant Boots: Greater Vitality, and the hit rating 
+	effect of Titanium Weapon Chain.</li>
+</ul>
+<h3>Version 1.1.5</h3>
+<ul>
+	<li>Feral druids and death knights rejoice!&nbsp; You can now assign 
+	separate values to base armor (on cloth, cloaks, leather, mail, and plate) and bonus 
+	armor (on weapons, trinkets, necklaces, rings, and enchantments).<ul>
+		<li>Please note that pre-Wrath items that had bonus armor (in green 
+		text) will have the full armor value reported as base armor even though 
+		some is bonus armor.&nbsp; There is currently no way for mods to tell 
+		the difference.</li>
+	</ul>
+	</li>
+	<li>Updated the default values for the socket stats to more appropriate 
+	values, assuming that you would use level 80 blue gems in them.&nbsp; Existing 
+	scales will not be changed.</li>
+	<li>Support for colorless / prismatic sockets added by blacksmithing has 
+	been removed.&nbsp; Since these sockets never appear on items normally, and 
+	they are simply an interim stage (you&#39;d never socket an item and then decide 
+	not to put a gem in it), I decided it didn&#39;t make sense to assign values to 
+	them. </li>
+	<li>The red text that appears after socketed jewelcrafter-only BoP gems that 
+	says that they require jewelcrafting will no longer appear with an asterisk 
+	(*).</li>
+	<li>Added support for Enchant Boots: Icewalker.</li>
+	<li>Worked around a bug that could cause the Compare tab to stop working in 
+	certain situations.</li>
+</ul>
+<h3>Version 1.1.4</h3>
+<ul>
+	<li>Fixed a bug where, on the Compare tab, meta sockets would appear under 
+	the &quot;socket bonus&quot; heading instead of the &quot;sockets&quot; heading.</li>
+	<li>Enchantments that are on enchanters&#39; rings when you are not an enchanter 
+	(the ones that appear in red) will no longer appear with asterisks (*).</li>
+	<li>Armor penetration rating on new Wrath of the Lich King items will now be 
+	interpreted correctly.</li>
+</ul>
+<h3>Version 1.1.3</h3>
+<ul>
+	<li>This is the patch 3.0 version of Pawn, and will not work properly on WoW 
+	2.4.x.&nbsp; The stats Spell damage, Healing, Spell hit rating, Spell crit 
+	rating, and Spell haste rating have all been removed.&nbsp; Spell damage and 
+	Healing have been replaced with Spell power, and the three Spell combat 
+	ratings have been combined into hybrid ratings that work for both casters 
+	and non-casters.&nbsp; Pawn will update your scales automatically, but you 
+	might want to check the values of those stats to make sure that they are in 
+	line with what you&#39;d expect.</li>
+	<li>Added stats that allow you to assign different values to different armor 
+	types (such as plate, cloth, etc.).</li>
+</ul>
+<h3>Version 1.1.2</h3>
+<ul>
+	<li>Added support for account-bound (gold-quality) items and more new things that appear in 
+	WoW 3.0.</li>
+	<li>Fixed an error message that could appear when using some item links from 
+	sites like Wowhead.</li>
+	<li>Armor penetration works once more on WoW 3.0.</li>
+</ul>
+<h3>Version 1.1.1</h3>
+<ul>
+	<li>Fixed Link Wrangler compatibility, which was broken in Pawn 1.1.</li>
+	<li>Items that have at least one recognized stat (normally marked with an 
+	asterisk) will be marked as such in the Compare tab.&nbsp; (This feature 
+	existed in 1.1 betas but did not appear in the final version.)</li>
+	<li>Added support for Lake Wintergrasp items and the Scourgestone.</li>
+</ul>
+<h3>Version 1.1</h3>
+<ul>
+	<li>This version of Pawn has been tested on both the live realms and on the Wrath of 
+the Lich King beta, and includes <i>tons</i> of fixes to make Pawn work 
+	correctly on Wrath servers, and to support new stats and types of items that 
+	appear in the expansion content, including new stats, new gems, encrypted 
+	items, colorless sockets, and more.</li>
+	<li>Pawn now sports a new tab, Compare, which lets you see two items 
+	side-by-side to compare their stats in more detail.&nbsp; Check it out!<ul>
+		<li>You can compare any two items in your inventory or a merchant&#39;s 
+		inventory by dropping them in 
+		the slots.</li>
+		<li>If the left slot is empty and you drop an item in the right slot, 
+		your currently equipped item will automatically be put in the left slot.</li>
+		<li>In addition to dragging and dropping items, all of the following 
+		shortcuts also work:<ul>
+			<li>Clicking either of the &quot;currently equipped&quot; shortcut buttons 
+			that appear in the lower-left corner once there is an item in the 
+			right slot.</li>
+			<li>Hovering over an item in your inventory, another player&#39;s 
+			inventory, a vendor&#39;s inventory, an item link window, AtlasLoot, or 
+			other locations, and pressing the &quot;[&quot; or 
+			&quot;]&quot; key.&nbsp; (This key binding is customizable in the regular key 
+			bindings interface.)</li>
+			<li>You can also right-click item link windows and item icons in 
+			loot roll windows to immediately compare the item with your 
+			currently equipped item.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>The first time you run Pawn after upgrading to 1.1, Pawn will 
+	automatically bind keys to its commands if you aren&#39;t using those keys for 
+	other things.&nbsp; By default, &quot;P&quot; will open and close the Pawn UI, and &quot;[&quot; 
+	and &quot;]&quot; are used for item comparisons.&nbsp; If 
+	you later unbind those keys or bind them to other actions, Pawn won&#39;t try to 
+	rebind them.</li>
+	<li>Fixed a bug where Pawn values didn&#39;t show up on item link windows if you 
+	only had unenchanted numbers visible, not enchanted numbers.</li>
+	<li>Fixed a problem where error text would appear in the chat window when 
+	hovering over recipes in Ackis Recipe List and possibly other similar mods.</li>
+	<li>German users rejoice!&nbsp; When entering stat values you can now use a 
+	comma instead of a period as a decimal separator—for example, &quot;0,5&quot; now 
+	works in addition to &quot;0.5&quot;.</li>
+	<li>In this version of Pawn, I&#39;ve significantly reorganized a lot of the code that reads 
+	and annotates item tooltips.&nbsp; This, coupled with other changes in Wrath 
+	of the Lich King, is likely to cause some conflicts with other mods.&nbsp; 
+	If you run into problems with Pawn, please remember to try to reproduce the 
+	same problem with no other item-related mods installed.&nbsp; I still may be 
+	able to fix the bug if it turns out that the bug is related to another mod, 
+	but I need to know <i>which</i> mod to download and try.</li>
+	</ul>
+<h3>Version 1.0.4</h3>
+<ul>
+	<li>Fixed a bug that would prevent Pawn from working properly if one or
+	more of your scales didn't assign a value to the spell damage stat.</li>
+	<li>Updated the value of the armor penetration and spell penetration stats 
+	in the default Pawn scale to match current itemization.&nbsp; Existing 
+	scales are not changed.</li>
+	<li>Pawn will no longer try to assign a default value to spell damage (WoW 2.4) if you use
+	a scale that contains only spell power (WoW 3.0).</li>
+</ul>
+<h3>Version 1.0.3</h3>
+<ul>
+	<li>Added an entry in the Interface Options dialog to launch the Pawn UI, in 
+	case you hide the Pawn button and forget how to get it back.</li>
+	<li>You can now assign a value to the Wrath of the Lich King &quot;spell power&quot; 
+	stat to your scales.&nbsp; It uses the same values by default as the &quot;spell 
+	power&quot; stat in Pawn 0.7.4, and your existing scales will be assigned a value 
+	for the stat automatically.&nbsp; Your scales will still have spell damage 
+	and healing stats in them, but they won&#39;t be used for anything.</li>
+	<li>In Wrath of the Lich King, the stats that currently appear as melee hit 
+	rating, melee crit rating, and melee haste will also apply to spells, and 
+	the spell hit, crit, and haste rating stats are not used.&nbsp; Existing 
+	scales will not be modified at this time.</li>
+</ul>
+<h3>Version 1.0.2</h3>
+<ul>
+	<li>When Armory is installed, added support for showing unenchanted values 
+	on the item comparison tooltips that appear when holding down the Alt key.</li>
+	<li>Added support for the stat-only components of Surefooted, Cat&#39;s 
+	Swiftness, and Boar&#39;s Speed.&nbsp; (The run speed and snare resistance 
+	effects are ignored since there are no Pawn stats for those.)</li>
+	<li>Fixed a bug where if you clicked a link for an item that had an icon and 
+	then a link for a spell that did not have an icon, the item&#39;s icon would not 
+	properly disappear.</li>
+	<li>Fixed a bug with reading certain items with multiple stats on the same 
+	line that was causing problems with the French translation in progress.</li>
+	<li>Removed a bunch more asterisks from various items.</li>
+</ul>
+<h3>Version 1.0.1</h3>
+<ul>
+	<li>It&#39;s now possible to force Pawn to always calculate an item&#39;s value 
+	based on the correct color of gems (Pawn 0.8 and older behavior) instead of 
+	maximizing the item&#39;s value by potentially using the wrong colors and 
+	ignoring the socket bonus (Pawn 0.9 and later behavior).&nbsp; To change the 
+	option for one of your scales, choose that scale in the UI and then choose 
+	one of the colored sockets from the stat list.</li>
+	<li>Added support for socket bonuses (and possible future gems) that give 
+	melee haste rating.</li>
+	<li>Added shaman healing scales based on the popular Elitist Jerks thread to 
+	the sample scales document that comes with Pawn.</li>
+</ul>
+<h3>Version 1.0</h3>
+<ul>
+	<li>Restored compatibility with Link Wrangler, which stopped working in Pawn 0.9.</li>
+	<li>Added support for showing Pawn values on Link Wrangler&#39;s &quot;compare 
+	equipped items&quot; tooltips.</li>
+	<li>Added support for showing inventory icons next to Link Wrangler 
+	tooltips.</li>
+	<li>There&#39;s now a &quot;getting started&quot; tab to gently remind new users to read 
+	the Readme file.</li>
+	<li>Takes advantage of new WoW 2.4 functionality to show inventory icons 
+	next to item link windows in a few situations where it couldn&#39;t before.</li>
+	<li>Various other UI and text tweaks.</li>
+</ul>
+<h3>Version 0.9</h3>
+<ul>
+	<li>Pawn is now smarter about the way that it values sockets and socket 
+	bonuses, which in some cases will slightly change the values of certain 
+	items, both with and without gems.<ul>
+		<li>If you&#39;ve already filled all of the sockets on an item and you don&#39;t 
+		qualify for the socket bonus, Pawn no longer counts the socket bonus 
+		stats, since they&#39;re not actually there.</li>
+		<li>If you can get a better value by socketing the wrong colors of gems 
+		and ignoring the socket bonus, Pawn will now do that when calculating 
+		item values.&nbsp; (When the &quot;Show debug info&quot; option is enabled, Pawn 
+		will tell you which color gems it used.)</li>
+	</ul>
+	</li>
+	<li>Pawn now remembers all of the stats from several of the last items 
+	you&#39;ve viewed so it doesn&#39;t have to always recalculate them.&nbsp; This 
+	should help your framerate when rapidly hovering over many items in 
+	succession, especially when an equip compare mod is also installed.</li>
+	<li>You now have to type the word &quot;delete&quot; to confirm that you really want 
+	to delete a scale.</li>
+	<li>You can now make a copy of an existing scale by clicking the new Copy 
+	button.</li>
+	<li>There is now an option to hide a specific scale from tooltips without 
+	having to delete it (and, most likely, export it and paste it somewhere for 
+	safekeeping).</li>
+	<li>Pawn will no longer look for stats on quest, spell, and ability links in 
+	WoW 2.4.</li>
+	<li>Fixed a bunch of UI bugs that occurred when deleting your last scale.</li>
+	<li>Pawn no longer adds unnecessary asterisks to Black Temple instance-bound items, such as Naj&#39;entus Spine.</li>
+	<li>Added support for Reckless Noble Topaz and other gems with spell haste 
+	rating.</li>
+</ul>
+<h3>Version 0.8.2</h3>
+<ul>
+	<li>The Pawn UI now displays the current Pawn version number on the last 
+	tab.</li>
+	<li>Pawn now supports addons that modify the Inspect window when it is first 
+	shown instead of immediately upon login, such as Spyglass.</li>
+</ul>
+<h3>Version 0.8.1</h3>
+<ul>
+	<li>You can now hover over the Pawn button on the inventory window to get a 
+	grand total of the enchanted values on all of your equipped items.</li>
+	<li>There is now a disabled Pawn button on the inspect window that you can 
+	hover over to get totals for all of another player&#39;s equipped items.</li>
+	<li>Fixed a bug where all on/off options that defaulted to being on (show 
+	enchanted values, show unenchanted values, and show tooltip icons) would 
+	automatically turn back on after logging out and back in.</li>
+	<li>Fixed a bug where sometimes disabling enchanted values would cause 
+	unenchanted values to also not be displayed.</li>
+	<li>Fixed a bug where the word &quot;Projectile&quot; on stacks of arrows would get an 
+	asterisk, and their DPS would not count as ranged DPS.</li>
+	<li>Fixed a bug where negative values would not be exported in scale tags.&nbsp; 
+	(Negative stat values are most common with weapon speed.)</li>
+</ul>
+<h3>Version 0.8</h3>
+<ul>
+	<li>The Pawn UI now has an Options tab that you can use to set all Pawn 
+	options.</li>
+	<li>Almost all of the Pawn slash commands are now unnecessary, and have been 
+	removed.&nbsp; You can still use /pawn to open the Pawn UI, and /pawn debug 
+	is still available as well.</li>
+	<li>Tooltips have been added to pretty much everything in the Pawn UI.</li>
+	<li>You can use the new calculation option &quot;Normalize values&quot; to divide all of your scale values by 
+	the sum of all of the numbers in the scale.&nbsp; This causes Pawn to 
+	generate the same sorts of numbers that Lootzor does.&nbsp; (See the 
+	appropriate section in the readme file for more details.)</li>
+	<li>You can now change the text color for your scales individually from the 
+	Pawn UI.&nbsp; You could, for example, make your healing scale show up in 
+	white and your DPS scale show up in red.</li>
+	<li>You can now bind a key to the Pawn UI.&nbsp; Look under &quot;Pawn&quot; in the 
+	standard key bindings list.</li>
+	<li>Added support for the Fiery Weapon enchantment; Pawn counts it as 4 dps.</li>
+	<li>Fixed a bug where sometimes tooltip icons would not appear for items 
+	that had never been in your inventory.&nbsp; (This includes most links in 
+	trade chat.)</li>
+	<li>Fixed a bug where if you clicked on an item link for an item, and then a 
+	tradeskill recipe (such as [Alchemy: Super Mana Potion]), the icon for the 
+	previous item would stay since the recipe did not have one.</li>
+	<li>Fixed a bug where if you had set custom colors for your scales, scales 
+	would no longer always be sorted alphabetically by name on item tooltips.</li>
+</ul>
+<h3>Version 0.7.5</h3>
+<ul>
+	<li>Pawn now shows inventory icons next to item link and item comparison 
+	tooltips, so when someone links an item, you can also see its inventory 
+	icon.&nbsp; You can turn this feature off with /pawn icons off.<ul>
+		<li>This feature works with the built-in WoW functionality, as well as a 
+		variety of other tooltip mods: EquipCompare, EQCompare, and MultiTips.</li>
+	</ul>
+	</li>
+	<li>When /pawn ids on is active, Pawn now displays the item IDs of all 
+	applicable enchantments and gems in the tooltip as well.&nbsp; For example, 
+	if looking at item 123 with no enchantment and gems 45 and 67 socketed, you 
+	would see &quot;Item ID: 123:0:45:67&quot;.</li>
+	<li>You can now have Pawn align item values (and IDs and levels, if those 
+	options are on) along the right side of the tooltip with /pawn align numbers 
+	right.&nbsp; Some people may find this easier to read; others may find it 
+	more difficult.</li>
+	<li>A new category of stats has been added, &quot;weapon types,&quot; which is 
+	primarily useful for racial abilities and talents.<ul>
+		<li>For example, orcs 
+	get a passive 5 expertise bonus when using axes.&nbsp; So, you might give a 
+		weapon a few bonus points just for being an axe.&nbsp; At level 70, 5 
+		expertise costs 78.8 expertise rating, so you might value &quot;being an axe&quot; 
+		as high as 78.8.</li>
+	</ul>
+	</li>
+</ul>
+<h3>Version 0.7.4</h3>
+<ul>
+	<li>Pawn plugins for FuBar and Titan Panel are now available as 
+	separate downloads.&nbsp; You can get them at
+	<a target="_blank" href="http://www.curse.com/downloads/details/8214/">Curse</a>.</li>
+	<li>The old &quot;spell power&quot; stat made sense before patch 2.3, but it was 
+	particularly confusing to healers after that patch, so I&#39;ve removed it, and 
+	replaced it with easier-to-understand &quot;spell damage&quot;.&nbsp; Now, 
+	the healing stat only 
+	includes healing, and the spell damage stat only includes spell damage.<ul>
+		<li>Now, Light&#39;s Justice, which says that it increases healing by 382 
+		and damage by 128, has 382 healing and 128 spell damage, exactly as 
+		you&#39;d expect.</li>
+		<li>Pawn will automatically upgrade your existing scales and any scale 
+		tags that you import.&nbsp; Please double-check the value of the spell 
+		damage stat after importing to make sure that it&#39;s what you intended, 
+		as in this version Pawn does not read your mind.&nbsp; 
+		The upgrade process will give correct results for typical cases (DPS 
+		casters who don&#39;t care about healing; healers who valued spell power at 
+		least as high as healing, as they should have), but may not give the 
+		results you expect if you had a strange scale (healing but no spell 
+		power).</li>
+		<li>As always, the default Pawn scale has been adjusted to accommodate 
+		these changes.</li>
+	</ul>
+	</li>
+	<li>A new slash command /pawn enchanted has been added to let you turn off 
+	the enchanted item values, showing only the unenchanted, unsocketed values 
+	for items.&nbsp; (You can also use /pawn enchanted off along with /pawn 
+	unenchanted off to temporarily hide all Pawn values.)&nbsp; This option may 
+	not be compatible with all of your favorite tooltip mods, but it should work 
+	in all cases where you currently get unenchanted item values today, which is 
+	most everywhere.</li>
+	<li>The Pawn button has a new, unique look, instead of being a regular red 
+	WoW button.</li>
+	<li>The Pawn button now appears in a more reasonable spot when the character 
+	inventory window has been skinned using a mod such as Skinner.</li>
+	<li>A new slash command /pawn button has been added to let you move the Pawn 
+	button on the inventory window, or hide it completely.&nbsp; (If you hide 
+	the button, you&#39;ll need to type /pawn to open the Pawn UI, or use the 
+	Pawn plugin for FuBar or Titan Panel.)</li>
+	<li>Added a new option to the /pawn asterisks slash command, /pawn asterisks 
+	no text.&nbsp; Using this option is the same as /pawn asterisks auto, except 
+	the &quot;* Pawn gave no value to some stats&quot; warning text is not added to 
+	tooltips of items with at least one (*) unrecognized stat.</li>
+</ul>
+<h3>Version 0.7.3</h3>
+<ul>
+	<li>Added a button to the inventory window to show and hide the Pawn 
+	configuration UI.</li>
+	<li>Pawn now supports Armory and EquipCompare working together with the &quot;/eqc 
+	alt&quot; option to show comparisons with your alt&#39;s gear instead of your current 
+	character&#39;s.</li>
+	<li>Added support for the unusual items with negative stats, such as Kreeg&#39;s 
+	Mug, which gives -10 Intellect.</li>
+	<li>Added support for Braided Eternium Chain and other non-weapon items with 
+	weapon damage as an equip bonus.&nbsp; It shows up as minimum damage and 
+	maximum damage, but not DPS—it&#39;s not a weapon, so there&#39;s no speed, and 
+	therefore no DPS.</li>
+	<li>Fixed a problem that would frequently show up when using Pawn with 
+	CowTip, causing an error message to appear in chat when hovering over an 
+	item and then an empty inventory slot.</li>
+	<li>Fixed a problem where sometimes an open item link window would not be 
+	immediately updated upon making scale changes.</li>
+	<li>Minor changes to fix some issues when running a German version of Pawn 
+	on the German WoW client.</li>
+	<li>Updated the samples scales document with newer versions of Emmerald&#39;s 
+	feral combat models and ShadowPanther&#39;s AEP model, and added scales for 
+	Malan&#39;s Elitist Jerks EP for shamans.</li>
+</ul>
+<h3>Version 0.7.2</h3>
+<ul>
+	<li>The special weapon DPS stats now work.&nbsp; I had broken them in either 
+	0.7 or 0.7.1.&nbsp; Existing scales will automatically be corrected; you 
+	should not need to re-enter values for those stats.</li>
+</ul>
+<h3>Version 0.7.1</h3>
+<ul>
+	<li>If the item link window is open when you make changes to your Pawn 
+	scales, it will now be updated immediately, so you can see how your changes 
+	will affect the value of the item.</li>
+	<li>Added spell hit rating and spell crit rating to the configuration UI.&nbsp; 
+	(Oops!)</li>
+	<li>Corrected a typo in the description of the melee and ranged crit rating 
+	stat.</li>
+</ul>
+<h3>Version 0.7</h3>
+<ul>
+	<li>Pawn now has a configuration UI!&nbsp; To access it, simply type /pawn 
+	in the chat box.&nbsp; (To see the help information that used to be 
+	available when you typed /pawn, type /pawn help, or click the /pawn commands 
+	button in the configuration UI.)&nbsp; You should no longer need to manually edit your SavedVariables files 
+		to configure Pawn.</li>
+		<li>The configuration UI is now the official way to make all changes to 
+		your Pawn scales.&nbsp; Some of the slash commands that existed in 
+		earlier versions of Pawn are gone, since they&#39;re no longer needed: /pawn 
+		list, export, import, delete, rename.</li>
+	<li>Eliminated that bug where sometimes unenchanted values would 
+	disappear from items after a while.&nbsp; The problem seemed to be most 
+	commonly linked to use of the world map, but also could occur after zoning 
+	or showing the interface options window.</li>
+	<li>Scales now appear in alphabetical order on item tooltips.</li>
+	<li>Pawn now works with tekKompare and LootLink.</li>
+	<li>Fixed a bug where the value of resilience rating in the default Pawn 
+	value scale was 0 instead of 1 as was intended.&nbsp; Scale tags that call resilience rating &quot;Resilience&quot; instead of &quot;ResilienceRating&quot; 
+	will now be imported properly.</li>
+	<li>The value of ArmorPenetration in the default Pawn value scale is now 
+	0.1, based on the latest information on WoWWiki.</li>
+	<li>Includes VgerCore 1.0.1.</li>
+</ul>
+<h3>Version 0.6.3</h3>
+<ul>
+	<li>Added support for items in the guild bank vault.</li>
+	<li>In <i>some</i> cases, you can use mods that create fake item tooltips 
+	like AtlasLoot and ItemSync along with mods that mangle item tooltips like 
+	Rating Buster, and Pawn will now still work.&nbsp; No guarantees that your 
+	favorite combination of mods won&#39;t break Pawn, but this should help a lot of 
+	people out.</li>
+	<li>Finally fixed that bug where items with both durability and an Equip: or 
+	Use: line that Pawn didn&#39;t understand would get asterisks on the wrong 
+	lines.&nbsp; (For example, Stalker&#39;s Helm of Second Sight has this problem.)</li>
+	<li>Added the /pawn space command, which adds a blank space before the item 
+	values it adds to tooltips.</li>
+	<li>Added a special &quot;stat&quot; called SpeedBaseline.&nbsp; SpeedBaseline isn&#39;t an 
+	actual item property, but rather a number to be subtracted from weapon 
+	speeds before they&#39;re multiplied by your scale values.&nbsp; For example, if 
+	you&#39;re an enhancement shaman who wants to give weapons 1 point for every 0.1 
+	second of speed slower than 2.9, use Speed = 10 (1 / 0.1) and SpeedBaseline 
+	= 2.9.&nbsp; Weapons slower than 2.9 would instead lose points at the same rate.</li>
+	<li>Adjusted the value of the FeralAp stat in the Pawn default scale from 
+	0.5 to 0.4 so that feral items in 2.3 will have roughly the same values as 
+	they did in 2.2 with the old Pawn default scale and so that the Pawn default 
+	scale still roughly mimics item budget formulas.&nbsp; I do not necessarily 
+	recommend that you change values in your own scales; your items have been 
+	buffed, so it makes sense for their values to go up.</li>
+	<li>Weapon skill rating stats have been removed from Pawn and the default 
+	Pawn scale, as they&#39;ve been removed from the game in the patch.&nbsp; 
+	Existing scales will not be automatically updated to use ExpertiseRating.</li>
+	<li>Added Pawn values to gems in the socketing UI.</li>
+	<li>Fixed the amount of healing and spell damage received from Teardrop 
+	Tourmaline and possibly other gems that previously only gave healing.</li>
+	<li>Added support for the new Chaotic Skyfire Diamond.</li>
+	<li>Now displays a more readable error message when the embedded mod 
+	VgerCore is missing or failed to load.</li>
+	<li>Fixed several problems introduced in 2.3:<ul>
+	<li>Fixed a problem that appeared in 2.3 due to the new way that set item 
+	tooltips look where Pawn was putting asterisks all over the name of the set, 
+	the items in the set, and the set bonuses.</li>
+	<li>Fixed a problem that appeared in 2.3 where stats on meta gems weren&#39;t 
+	always being counted due to requirements now being displayed on gems even 
+	when socketed.</li>
+		<li>Fixed a bug that appeared in 2.3 only where certain gems and random item 
+	properties would appear very strange, such as &quot;+45 Stamina|cfff1a1a1a&quot;, and 
+	Pawn would not understand them.</li>
+	</ul>
+	</li>
+</ul>
+<h3>Version 0.6.2</h3>
+<ul>
+	<li>Fixed a script error that appeared the first time a recipe was clicked 
+	since logging in or resetting your UI.</li>
+	<li>Pawn now includes VgerCore 1.0 embedded within the mod; you don&#39;t need a 
+	separate VgerCore folder in your AddOns folder.</li>
+</ul>
+<h3>Version 0.6.1</h3>
+<ul>
+	<li>Supports the 2.2.x live realms and the 2.3 PTRs.&nbsp; 
+	(Healing-to-spell-damage and expertise require 2.3, of course.)</li>
+	<li>Support for the healing to spell damage conversion.&nbsp; Items that say 
+	that they increase healing by 300 and spell damage by 100 will be reported 
+	as Healing = 200, SpellPower = 100.&nbsp; Recall that SpellPower <i>includes</i> 
+	healing, thus your scale&#39;s value for SpellPower should always be equal to or 
+	greater than the value for Healing.</li>
+	<li>A new value of .255 was picked for the value of Healing in the default 
+	scale, down from .455.&nbsp; With this value, items that had 1/3 of their 
+	Healing converted to SpellPower (default value .855) in 2.3 will have the exact 
+	same values in 2.3 that they did with the old scale in 2.2 (ignoring rounding errors).&nbsp; Of 
+	course, you can and should customize your Pawn scales to fit your needs; 
+	generally, healers should <i>not </i>adjust their scales to deal with this 
+	change.</li>
+	<li>Support for the new ExpertiseRating stat, valued at 1 in the 
+	default &quot;Pawn value&quot; scale, same as the existing weapon skill 
+	stats.&nbsp; Existing scales will not be adjusted to include this stat.&nbsp; 
+	If you haven&#39;t customized your scales and want to reset them, use /pawn resetscales.<ul>
+		<li>Weapon skill ratings are currently still supported so you can use 
+		Pawn 0.6.1 on the live realms too.&nbsp; They&#39;ll be removed in a later 
+		version.</li>
+	</ul>
+	</li>
+	<li>Support for many more healing enchantments, inscriptions, spellthread, 
+	and so forth.</li>
+	<li>Craftable items for which you can learn recipes from trainers will now 
+	get Pawn values.</li>
+</ul>
+<h3>Version 0.6</h3>
+<ul>
+	<li>Fixed a problem introduced in beta 1 where Pawn would display 
+	an error message in the chat window whenever hovering over a ring with 
+	Enchant Ring - Weapon Might.</li>
+	<li>Added the ability to customize the colors that your scales will use when 
+	printed.&nbsp; For example, you could have your DPS value show up in orange, 
+	and your healing value show up in green.&nbsp; This is an advanced feature 
+	that probably will never get its own UI or slash command.&nbsp; See the 
+	section titled &quot;Changing the color of a scale&quot; for more information.</li>
+	<li>Importing a scale tag that has the exact same name as a scale you 
+	already have will update the old scale to match the values in the scale tag.&nbsp; 
+	All of the values in the old scale will be deleted.&nbsp; (In previous 
+	versions, Pawn would just fail and warn you that you can&#39;t overwrite an 
+	existing scale.&nbsp; There is no longer a warning.)</li>
+	<li>Weapon stats have been overhauled!&nbsp; Old scales will work, but now 
+	advanced users have a variety of new options for assigning values to 
+	weapons.</li>
+	<li>New stats: MeleeMinDamage, MeleeMaxDamage, MeleeSpeed, MeleeDps, 
+	MainHandMinDamage, MainHandMaxDamage, MainHandSpeed, MainHandDps, 
+	OffHandMinDamage, OffHandMaxDamage, OffHandSpeed, OffHandDps, 
+	OneHandMinDamage, OneHandMaxDamage, OneHandSpeed, OneHandDps, 
+	TwoHandMinDamage, TwoHandMaxDamage, TwoHandSpeed, TwoHandDps, 
+	RangedMinDamage, RangedMaxDamage, RangedSpeed, RangedDps.&nbsp; Generally, 
+	you&#39;ll only use a few of these, and not give values to all of them.</li>
+	<li>New stats: MinDamage, MaxDamage, Speed.&nbsp; If you don&#39;t care about 
+	which slot or weapon type it is, just use MinDamage, MaxDamage, Speed, 
+	and/or Dps.&nbsp; Dps is now calculated to full precision (say, 41.333 
+	instead of 41.3) instead of rounded to one decimal place.</li>
+	<li>Added support for weapon damage enchantments (Striking and Impact).</li>
+	<li>Added support for ranged weapon scopes.</li>
+	<li>Fixed a problem where certain items with suffixes would show unusually low unenchanted
+	values (their stats would be read as 0).  For example, Chimaerascale Legguards of the Bandit
+	exhibited this problem.</li>
+	<li>Added support for Black Morass instance-bound items (beacons).</li>
+</ul>
+<h3>Version 0.5.4</h3>
+<ul>
+	<li>Added support for haste rating and spell haste rating, which were added as passive
+	item bonuses on Black Temple equipment.  (Iron Counterweight is also supported.)  These two
+	stats (HasteRating, SpellHasteRating) are valued at 1 each on the default Pawn scale; existing
+	Pawn scales won't be affected.  Use /pawn resetscales to delete all of your scales and replace them
+	with the default one.</li>
+	<li>Added support for armor penetration ("Your attacks ignore X of your opponent's armor").
+	This stat (ArmorPenetration) is not valued in the default Pawn scale.</li>
+	<li>Added support for Karazhan, Stratholme, and Tempest Keep instance-bound items.</li>
+</ul>
+<h3>Version 0.5.3</h3>
+<ul>
+	<li>Added support for the new gold profession recipe links in WoW 2.1.&nbsp; 
+	(Pawn won&#39;t try to read them or put asterisks all over them.)</li>
+</ul>
+<h3>Version 0.5.2</h3>
+<ul>
+	<li>Added working support for the Savagery weapon enchantment, and untested support
+	for Potency, Soulfrost, and Sunfire.</li>
+	<li>Added support for EquipCompare 2.10.&nbsp; (This may break compatibility 
+	with older versions of EquipCompare; please use the latest version.)</li>
+</ul>
+<h3>Version 0.5.1</h3>
+<ul>
+	<li>Updated for WoW patch 2.1.</li>
+	<li>Added support for Blizzard&#39;s new Currently Equipped functionality 
+	(shift-hover an item).</li>
+	<li>LinkWrangler support.</li>
+	<li>Fixed a bug where stats in certain situations (gems with multiple stats 
+	on one gem, socket bonuses, etc.) wouldn&#39;t get shown in the /pawn debug on 
+	output.&nbsp; This did not affect calculation; it was just a debug display error.</li>
+	<li>Expanded the amount of information Pawn returns in the debug output.</li>
+	<li>Added support for Enchant Boots: Vitality.</li>
+	<li>Slightly updated a few of the default &quot;Pawn value&quot; scale&#39;s numbers.&nbsp; 
+	This will not affect existing scales, even if you haven&#39;t changed any of the 
+	defaults.&nbsp; If you want to get the new scale, you can wipe out your 
+	existing scale(s) with /pawn resetscales.</li>
+</ul>
+<h3>Version 0.5</h3>
+<ul>
+	<li>Requires VgerCore 0.4.  (This is included with the mod.  Pawn will warn you if you
+	are using an older version of VgerCore.)</li>
+	<li>Pawn can now show unenchanted values for items in addition to the 
+	regular enchanted values, and this is enabled by default.&nbsp; You can turn 
+	it off with /pawn unenchanted off.&nbsp; This feature only works for real 
+	tooltips, and not fake tooltips from an item database mod.</li>
+	<li>Added an option to control the number of digits of precision Pawn uses 
+	to display item values in tooltips.&nbsp; By default this is 1 (&quot;3.1&quot;), but 
+	you can set it to any number between 0 (&quot;3&quot;) and 4 (&quot;3.1416&quot;) with /pawn 
+	digits #.</li>
+	<li>Corrected the value of frost resistance in the default Pawn scale to 1 
+	(was 4).</li>
+	<li>Pawn scale tags now have spaces inside of the parentheses by default.&nbsp; 
+	This is to prevent certain scale tags from turning into emoticons when 
+	posted to certain forums.&nbsp; (For example, if your scale tag ended in &quot;RedSocket=8)&quot;, 
+	the 8) would turn into an emoticon on certain forums.)&nbsp; Old and current 
+	versions of Pawn will accept the scale with or without the extra spaces. </li>
+	<li>Lots of work was done to prepare for Pawn translations into other languages.&nbsp; 
+	I may have made a mistake in this conversion and introduced cases where (*) 
+	shows up where they didn&#39;t before; hopefully not.</li>
+</ul>
+<h3>Version 0.4.1</h3>
+<ul>
+	<li>Added support for gun, bow, and crossbow skill ratings.</li>
+	<li>Added support for MultiTips.</li>
+	<li>Added support for items that list stats as &quot;Stat +X&quot; instead of &quot;+X 
+	Stat&quot;, namely the epic gems.&nbsp; Gems that only provided primary stats, 
+	such as Seer&#39;s Chrysoprase, already worked, but others such as Rune Covered 
+	Chrysoprase didn&#39;t work until this change.</li>
+</ul>
+<h3>Version 0.4</h3>
+<ul>
+	<li>Added scale tags!&nbsp; Scale tags are chunks of text that you can use 
+	to share Pawn scales with friends, guildmates, and others on forums, similar 
+	to how you can share talent specs today by passing around a link to the WoW 
+	talent calculator.&nbsp; You can copy a scale tag and then post it on your 
+	guild forums, and then another player can copy that tag and paste it into 
+	their game to automatically add your scale to their copy of Pawn, without 
+	logging out of the game or changing files in Notepad.&nbsp; To export a 
+	scale tag so you can share it with others, use the /pawn export command.&nbsp; 
+	To import someone else&#39;s scale tag and add it to your own scales, use the 
+	/pawn import command.</li>
+	<li>Added new slash commands: /pawn list, export, import, delete, and 
+	rename.&nbsp; See &quot;Slash commands&quot; in Readme.htm for more details.</li>
+	<li>Added support for weapon skill ratings (including unarmed and feral 
+	combat).&nbsp; (They have been added to the default Pawn scale, but if you 
+	care about weapon skill ratings you must add them to your custom scales 
+	manually.)</li>
+	<li>Fixed the /pawn resetscales command so that it would delete all of your 
+	scales before recreating the default one named Pawn value, as was intended.</li>
+</ul>
+<h3>Version 0.3.1</h3>
+<ul>
+	<li>Hovering over an enchanted Item X immediately after hovering over an 
+	unenchanted Item X will now recalculate the values for the second item 
+	instead of just displaying the ones for the first item.&nbsp; This should 
+	work for all pairs of items that differ only by enchantments and gems.</li>
+</ul>
+<h3>Version 0.3</h3>
+<ul>
+	<li>To read statistics, Pawn now makes a copy of the tooltip and reads from 
+	that whenever possible, which allows it to read tooltips that have been 
+	mangled by other mods.&nbsp; Examples of mods that do this are Mendeleev and 
+	Rating Buster.&nbsp; (Certain mods that use custom tooltips, such as 
+	ItemSync, don&#39;t support this; Pawn may still conflict with mods that modify 
+	those custom tooltips.)</li>
+</ul>
+<h3>Version 0.2.2</h3>
+<ul>
+	<li>ItemSync support, including using ItemSync with AtlasLoot.&nbsp; Pawn 
+	will calculate and display values for ItemSync&#39;s tooltips.</li>
+	<li>EQCompare support.&nbsp; Pawn will calculate and display values for 
+	EQCompare&#39;s tooltips.</li>
+	<li>Item level display should work just about everywhere now, instead of 
+	just in certain places.&nbsp; (In previous versions, it worked for inventory 
+	items, but not chat item links.&nbsp; Now it works on both.)</li>
+	<li>A new option has been added to display the item ID for items you come 
+	across, /pawn ids on.</li>
+	<li>The default is now to hide the asterisks (*) from items that don&#39;t have 
+	any values for any of your scales.&nbsp; So, for example, Hearthstone and 
+	potions won&#39;t display the asterisk.&nbsp; You can change this behavior using 
+	/pawn asterisks [ on | auto | off ].</li>
+</ul>
+<h3>Version 0.2.1</h3>
+<ul>
+	<li>Fixed a problem in 0.2 where Pawn wouldn&#39;t work if you&#39;d never used 
+	version 0.1 before.</li>
+</ul>
+<h3>Version 0.2</h3>
+<ul>
+	<li>EquipCompare support.&nbsp; Pawn will calculate and display values for 
+	EquipCompare&#39;s tooltips.</li>
+	<li>AtlasLoot support.&nbsp; Pawn will calculate and display values for 
+	instance drops when Atlas and AtlasLoot are installed.</li>
+	<li>Outfitter support.&nbsp; Pawn will no longer conflict with the lines 
+	that Outfitter adds to tooltips of items used in one or more gear sets.</li>
+	<li>MonkeyQuest support.&nbsp; I haven&#39;t actually observed it happening in 
+	the past, but this change should prevent MonkeyQuest&#39;s item tooltip 
+	annotations from affecting Pawn.</li>
+	<li>MobInfo-2 support.&nbsp; Pawn will no longer conflict with the drop rate 
+	information that MobInfo-2 adds to items.&nbsp; (This problem manifested 
+	itself both as unnecessary asterisks added to tooltips, and also as an 
+	&quot;attempted to concatenate a nil value&quot; error.)</li>
+	<li>Added APIs to create and change Pawn scales while you&#39;re still logged 
+	in.&nbsp; These will eventually be used to build a configuration UI.&nbsp; 
+	If you <i>really</i> want to, you can use them from the chat box to change 
+	Pawn scales while logged into the game.</li>
+	<li>Included a new file "Sample scales.htm" containing (you guessed it) some
+	sample scales that you can use to get started creating your own.  I'll add to this
+	over time.</li>
+</ul>
+<h3>Version 0.1</h3>
+<ul>
+	<li>The first released beta version of Pawn.&nbsp; The code is stable and 
+	the remaining bugs are mostly just to-do items.&nbsp; I&#39;ll get around to 
+	them eventually.</li>
+	<li>Not heavily optimized for performance.</li>
+	<li>No configuration UI.&nbsp; (Hope you like Notepad!)</li>
+</ul>
+<h2>The fine print</h2>
+<p>© 2006-2010 Green Eclipse.&nbsp; This mod is released under the Creative Commons
+<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+Attribution-NonCommercial-NoDerivs 3.0</a> license.&nbsp; In short, this means 
+that you can use it, copy it, and share it, but you can't sell it or distribute 
+your own altered versions without permission.  By using the mod you agree to the terms of the license.  For more information, click the link.</p>
+
+</body></html>
